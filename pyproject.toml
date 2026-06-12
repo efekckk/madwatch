@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "madwatch"
+version = "0.1.0"
+description = "Robust anomaly detection on MAD and the Modified Z-Score, with seasonal baselines"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Efecan Küçük", email = "efe.kckk@gmail.com" }]
+dependencies = ["numpy>=1.24,<3"]
+keywords = ["anomaly-detection", "mad", "modified-z-score", "time-series", "monitoring"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+[project.optional-dependencies]
+cli = ["pandas>=2.0", "matplotlib>=3.7"]
+dev = ["madwatch[cli]", "pytest>=8", "ruff>=0.4"]
+
+[project.urls]
+Repository = "https://github.com/efekckk/madwatch"
+"Why MAD?" = "https://efekckk.github.io/blog/why-mad"
+
+[project.scripts]
+madwatch = "madwatch.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/madwatch"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
