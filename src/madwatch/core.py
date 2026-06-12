@@ -5,6 +5,8 @@ SCALE = 0.6745
 
 def _validated(x) -> np.ndarray:
     arr = np.asarray(x, dtype=float)
+    if arr.ndim != 1:
+        raise ValueError("input must be 1-D")
     if arr.size == 0:
         raise ValueError("input is empty")
     if np.isnan(arr).any():

@@ -51,3 +51,9 @@ def test_empty_raises(fn):
 def test_nan_raises(fn):
     with pytest.raises(ValueError, match="NaN"):
         fn([1.0, float("nan"), 2.0])
+
+
+@pytest.mark.parametrize("fn", [mad, modified_zscore])
+def test_multidim_raises(fn):
+    with pytest.raises(ValueError, match="1-D"):
+        fn([[1.0, 2.0], [3.0, 4.0]])
