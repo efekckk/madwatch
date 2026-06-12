@@ -13,7 +13,7 @@ def weekly_series(weeks=4):
         for hour in range(24):
             ts = start + timedelta(days=day, hours=hour)
             base = 100.0 if ts.weekday() < 5 else 20.0
-            values.append(base + (hour % 3))
+            values.append(base + (hour % 3) + (day % 4))
             timestamps.append(ts)
     return timestamps, values
 
@@ -40,6 +40,8 @@ def test_dow_hour_bucket_key():
     monday_9 = datetime(2026, 2, 2, 9)
     z = sb.score([monday_9], [100.0])
     assert abs(z[0]) < 3.5
+    z_spike = sb.score([monday_9], [200.0])
+    assert abs(z_spike[0]) > 3.5
 
 
 def test_unseen_bucket_falls_back_to_global():
