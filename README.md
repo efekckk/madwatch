@@ -42,6 +42,12 @@ MAD is median-based, so a single outlier in the window barely moves the
 baseline. The `0.6745` constant makes the score comparable to a classic z-score
 on normal data, so the usual "flag at 3.5" rule still reads naturally.
 
+![MAD vs classic z-score](docs/assets/mad_vs_std.png)
+
+Same series, same 3.5 threshold ([examples/make_comparison_plot.py](examples/make_comparison_plot.py)):
+the classic z-score catches the whale and then goes blind while it sits in the
+window; MAD flags all four.
+
 Longer version: [Why MAD instead of standard deviation?](https://efekckk.github.io/blog/why-mad)
 
 ## Seasonal baselines
